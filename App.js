@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Button, Text, View} from 'react-native';
+import {Platform, StyleSheet, Button, Text, View, TouchableHighlight, TextInput} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 const instructions = Platform.select({
@@ -20,6 +20,19 @@ const instructions = Platform.select({
 type Props = {};
 
 class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: '', showCancel: false};
+  }
+
+
+   toggleCancel() {
+          this.setState({
+              showCancel: !this.state.showCancel
+          });
+   }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,6 +48,21 @@ class HomeScreen extends React.Component {
             });
           }}
         />
+        <TextInput
+                  style={{height: 40, width: 150}}
+                  placeholder="Type here to translate!"
+                  onChangeText={(text) => this.setState({text})}
+        />
+        <Text style={{padding: 10, fontSize: 42}}>
+            {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
+        </Text>
+        <Button
+            title="Press to show text below"
+            onPress={() => {
+                this.toggleCancel();
+            }}
+                    />
+        {this.state.showCancel && <Text style={styles.welcome}>I am not Hidden!</Text>}
       </View>
     );
   }
