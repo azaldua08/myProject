@@ -9,6 +9,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Button, Text, View, TouchableHighlight, TextInput} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import LandingPage from "./app/screens/LandingPage";
+import ItemDetails from "./app/screens/ItemDetails";
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -48,6 +50,10 @@ class HomeScreen extends React.Component {
             });
           }}
         />
+        <Button
+               title="Go to List"
+               onPress={() => this.props.navigation.navigate('LandingPage')}
+         />
         <TextInput
                   style={{height: 40, width: 150}}
                   placeholder="Type here to translate!"
@@ -104,6 +110,8 @@ const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen,
+    LandingPage: LandingPage,
+    ItemDetails: ItemDetails
   },
   {
     initialRouteName: 'Home',
